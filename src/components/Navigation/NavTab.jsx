@@ -1,11 +1,19 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+//import "./Nav.css";
 
 const NavTab = props => {
   return (
-    <NavLink className="nav-btn" activeClassName="nav-btn-active" to={props.to}>
-      {props.labelName}
-    </NavLink>
+    <div>
+      <NavLink
+        className={` ${props.className || ""}`}
+        activeClassName="nav-btn-active"
+        to={props.to}
+        onClick={() => props.onClick()}
+      >
+        {props.children}
+      </NavLink>
+    </div>
   );
 };
 

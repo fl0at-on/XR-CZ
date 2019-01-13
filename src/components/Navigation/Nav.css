@@ -1,0 +1,99 @@
+:root {
+  /*Add colors here!*/
+}
+
+nav.nav-bar {
+  overflow: hidden;
+  background-color: rgb(114, 114, 114);
+  display: inline-block;
+  width: 100%;
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+/*Testing out how to render a burger-menu*/
+.burger-menu {
+  display: none;
+  list-style-type: none;
+
+  position: absolute;
+  bottom: 50px;
+  right: 0px;
+}
+#site-nav-control {
+  display: none;
+}
+
+nav ul {
+  width: 100%;
+  background-color: rgb(114, 114, 114);
+  padding-left: 0;
+}
+nav li {
+  padding: 10px;
+}
+
+nav li:nth-child(odd) {
+  background-color: #5471b1;
+}
+
+nav .nav-btn-active {
+  background-color: #274f85;
+  color: white;
+}
+
+nav .nav-btn-active:hover {
+  background-color: #5075c5;
+}
+nav .nav-btn {
+  float: left;
+  display: block;
+  color: #c9c8c8;
+  text-align: center;
+  padding: 14px 14px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navlink:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+#menu-icon {
+  display: none;
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #274f85;
+  padding: 5px;
+  border-radius: 5px;
+  transform: scale(2);
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  #menu-icon {
+    display: inline-block;
+  }
+  #site-nav-control:checked ~ nav {
+    display: block;
+  }
+
+  .burger-menu {
+    display: block;
+  }
+
+  #site-nav-control ~ nav {
+    display: none;
+  }
+  nav .navlink,
+  nav .nav-btn {
+    visibility: hidden;
+    display: none;
+    position: absolute;
+  }
+}

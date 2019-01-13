@@ -17,7 +17,6 @@ class App extends Component {
             <Route path="/tracker" component={Trackers} />
             <Route path="/calculator" component={Calculator} />
             <Route path="/report" component={Reports} />
-
             <Route component={Error} />
           </Switch>
         </div>
