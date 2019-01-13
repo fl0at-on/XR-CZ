@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "../App.css";
 
+var convert = require("convert-units");
+
 const UnitMsmts = {
   metric: {
     height: "(cm)",
@@ -196,43 +198,68 @@ class BMI extends Component {
     const heightValue = document.getElementById("height").value;
     const weightValue = document.getElementById("weight").value;
 
+    // console.log(heightValue);
+    //  console.log(this.state.unit);
+
+    //convert entries to metric
+    let metricHeight;
+    let metricWeight;
+    if (this.state.unit !== "metric") {
+      metricHeight = convert(heightValue)
+        .from("in")
+        .to("cm");
+      metricWeight = convert(weightValue)
+        .from("lb")
+        .to("kg");
+    } else {
+      metricHeight = heightValue;
+      metricWeight = weightValue;
+    }
+
+    // console.log(metricHeight)
+    // console.log(metricWeight)
+
     //BMR & TDEE calculations
     let BMRValue;
     let TDEEValue;
     if (this.state.gender === "m") {
-      BMRValue = 66 + 13.7 * weightValue + 5 * heightValue - 6.8 * age;
+      BMRValue = 66 + 13.7 * metricWeight + 5 * metricHeight - 6.8 * age;
       TDEEValue = BMRValue * this.state.activity; //factor
     } else {
-      BMRValue = 665 + 9.6 * weightValue + 1.8 * heightValue - 4.7 * age;
+      BMRValue = 665 + 9.6 * metricWeight + 1.8 * metricHeight - 4.7 * age;
       TDEEValue = BMRValue * this.state.activity; //factor
     }
 
+    // console.log("[onSubmit] BMI Calculations");
     //BMI & Ponderal calculations
     let calcedBMIValue;
     let newPonderal;
 
-    if (this.state.unit === "metric") {
-      calcedBMIValue = weightValue / Math.pow(heightValue / 100, 2);
-      newPonderal = (weightValue / Math.pow(heightValue / 100, 3)).toFixed(2);
-    } else {
-      calcedBMIValue = (weightValue / Math.pow(heightValue, 2)) * 703;
-      newPonderal = (heightValue / Math.cbrt(weightValue)).toFixed(2);
-    }
+    calcedBMIValue = metricWeight / Math.pow(metricHeight / 100, 2);
+    newPonderal = (metricWeight / Math.pow(metricHeight / 100, 3)).toFixed(2);
+
     const newBMI = [...this.state.bmi];
 
-    newBMI.value = calcedBMIValue.toFixed(2);
+    // console.log("[onSubmit] BMI Details");
 
+    newBMI.value = calcedBMIValue.toFixed(2);
     const bmiStatus = UnitMsmts.bmiTable.filter(category => {
       return category.upper >= Number(newBMI.value);
     })[0].category;
 
+    // console.log(newBMI.value)
+    // console.log(bmiStatus)
+
     newBMI.status = bmiStatus;
 
+    //console.log("[onSubmit] Setting state");
+
+    //set state for all
     this.setState({
       bmi: newBMI,
       ponderal_index: newPonderal,
-      bmr: BMRValue,
-      tdee: TDEEValue
+      bmr: BMRValue.toFixed(0),
+      tdee: TDEEValue.toFixed(0)
     });
   };
   render() {
@@ -257,14 +284,16 @@ class BMI extends Component {
         <div className="bmi-output">
           {this.state.bmi.value !== 0 ? (
             <div>
-              <h3>Calculated BMI: {this.state.bmi.value}</h3>
-              <h3>Status: {this.state.bmi.status}</h3>
+              <div>
+                <h3>BMI: {this.state.bmi.value}</h3>
+                <h3>BMI Definition: {this.state.bmi.status}</h3>
+              </div>
               <h3>Ponderal Index: {this.state.ponderal_index}</h3>
               <h3>BMR: {this.state.bmr}</h3>
               <h3>TDEE: {this.state.tdee}</h3>
             </div>
           ) : (
-            <div />
+            <div>Nothing here so far</div>
           )}
         </div>
       </div>

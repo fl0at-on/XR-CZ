@@ -33,7 +33,7 @@ select {
 }
 
 input[type="submit"] {
-  background-color: #4caf50;
+  background-color: #274f85;
   color: white;
   padding: 12px 20px;
   border: none;
@@ -43,7 +43,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-  background-color: #50c554;
+  background-color: #5075c5;
 }
 
 .row:after {
@@ -69,7 +69,7 @@ input[type="submit"]:hover {
 }
 
 .nav-btn-active {
-  background-color: #4caf50;
+  background-color: #274f85;
   color: white;
 }
 .nav-btn:hover {
