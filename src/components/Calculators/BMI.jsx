@@ -125,14 +125,23 @@ const BMIFactors = {
   ]
 };
 
+/*WHAT IS THIS - HOW DO I CLEAN UP PROPS.PROPS.PROPS 
+is item=props.props.item *really* a way to handle it?*/
 const RenderInputSwitch = props => {
-  switch (props.props.props.inputtype) {
+  //console.log(props);
+  const item = props.props.item;
+
+  switch (item.inputtype) {
     case "select":
       return (
-        <select name={props.props.props.name} onChange={e => props.onToggle(e)}>
-          {props.props.props.options.map((option, index) => {
+        <select name={item.name} onChange={e => props.onToggle(e)}>
+          {item.options.map((option, index) => {
             return (
-              <option key={index} value={option.value}>
+              <option
+                key={index}
+                value={option.value}
+                title={option.description}
+              >
                 {option.text}
               </option>
             );
@@ -142,25 +151,32 @@ const RenderInputSwitch = props => {
     default:
       return (
         <input
-          type={props.props.props.inputtype}
-          step="0.01"
-          id={props.props.props.name}
-          name={props.props.props.name}
+          type={item.inputtype}
+          step="0.1"
+          id={item.name}
+          name={item.name}
+          onChange={e => props.onChange(e)}
         />
       );
   }
 };
 
 const BMIForm = props => {
+  //console.log(props.item);
   return (
     <div className="row">
       <div className="col-25">
-        <label htmlFor={props.props.name}>
-          {props.props.text} {UnitMsmts[props.unit][props.props.name]}
+        <label htmlFor={props.item.name}>
+          {props.item.text} {UnitMsmts[props.unit][props.item.name]}
         </label>
       </div>
       <div className="col-75">
-        <RenderInputSwitch props={props} onToggle={e => props.onToggle(e)} />
+        <RenderInputSwitch
+          props={props}
+          item={props.item}
+          onToggle={e => props.onToggle(e)}
+          onChange={e => props.onChange(e)}
+        />
       </div>
     </div>
   );
@@ -173,6 +189,9 @@ class BMI extends Component {
       unit: "metric",
       gender: "m",
       activity: 1.2,
+      age: 0,
+      height: 0,
+      weight: 0,
       bmi: [{ value: 0, status: "", risk: "", prime: "" }],
       ponderal_index: 0,
       ideal_weight: 0,
@@ -183,7 +202,13 @@ class BMI extends Component {
     };
   }
 
-  onToggle = e => {
+  handleChange = e => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [name]: value });
+  };
+
+  handleToggle = e => {
     //console.log(`{onUnitToggle] msg received ${e.target.value}`);
     const name = e.target.name;
 
@@ -194,9 +219,9 @@ class BMI extends Component {
     e.preventDefault();
     //console.log("[onSubmit] received");
 
-    const age = document.getElementById("age").value;
-    const heightValue = document.getElementById("height").value;
-    const weightValue = document.getElementById("weight").value;
+    const age = this.state.age;
+    const heightValue = this.state.height;
+    const weightValue = this.state.weight;
 
     // console.log(heightValue);
     //  console.log(this.state.unit);
@@ -272,8 +297,9 @@ class BMI extends Component {
               <BMIForm
                 key={index}
                 unit={this.state.unit}
-                onToggle={e => this.onToggle(e)}
-                props={item}
+                onToggle={e => this.handleToggle(e)}
+                onChange={e => this.handleChange(e)}
+                item={item}
               />
             );
           })}

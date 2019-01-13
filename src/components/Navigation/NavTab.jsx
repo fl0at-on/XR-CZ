@@ -4,6 +4,7 @@ import { NavLink, Link } from "react-router-dom";
 
 const NavTab = props => {
   return (
+    // {props.onClick() ? return() : return() }
     <div>
       <NavLink
         className={` ${props.className || ""}`}

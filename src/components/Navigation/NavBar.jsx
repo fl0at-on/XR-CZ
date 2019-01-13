@@ -37,8 +37,15 @@ class NavBar extends React.Component {
         <nav className="nav-bar">
           <div>
             <NavTab
+              to="/landing"
+              className="nav-btn"
+              children="Log In"
+              onClick={() => {}}
+            />
+
+            <NavTab
               to="/tracker"
-              className="nav-btn first-nav"
+              className="nav-btn"
               children="Daily Tracker"
               onClick={() => {}}
             />
@@ -59,13 +66,26 @@ class NavBar extends React.Component {
           <ul className="burger-menu">
             <li>
               <NavTab
+                to="/landing"
+                className="nav-mobile"
+                children="Log In"
+                onClick={() => this.setState({ checked: false })}
+              >
+                <span>
+                  <i className="fa fa-fw  fas fa-angle-right" />
+                  Landing
+                </span>
+              </NavTab>
+            </li>
+            <li>
+              <NavTab
                 to="/tracker"
                 className="nav-mobile"
                 children="Daily Tracker"
-                onClick={() => this.setState({})}
+                onClick={() => this.setState({ checked: false })}
               >
                 <span>
-                  <i className="fa fa-fw fa-arrow-right" />
+                  <i className="fa fa-fw  fas fa-angle-right" />
                   Daily Tracker
                 </span>
               </NavTab>
@@ -78,7 +98,7 @@ class NavBar extends React.Component {
                 onClick={() => this.setState({ checked: false })}
               >
                 <span>
-                  <i className="fa fa-fw fa-arrow-right" />
+                  <i className="fa fa-fw  fas fa-angle-right" />
                   Calculators
                 </span>
               </NavTab>
@@ -91,13 +111,14 @@ class NavBar extends React.Component {
                 onClick={() => this.setState({ checked: false })}
               >
                 <span>
-                  <i className="fa fa-fw fa-arrow-right" />
+                  <i className="fa fa-fw  fas fa-angle-right" />
                   Report
                 </span>
               </NavTab>
             </li>
             <li>
               <label
+                className="nav-mobile"
                 htmlFor="site-nav-control"
                 onClick={() => this.setState({ checked: false })}
               >

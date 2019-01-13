@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BMI from "./BMI.jsx";
-import TDEE from "./TDEE.jsx";
-import IIFYM from "./IIFYM.jsx";
+// import TDEE from "./TDEE.jsx";
+// import IIFYM from "./IIFYM.jsx";
 import "../App.css";
 
 class Calculators extends Component {
@@ -13,10 +13,8 @@ class Calculators extends Component {
   render() {
     return (
       <div className="container">
-        <h1>Let's get Calc-ing!</h1>
+        <h1>Calc-U-Later</h1>
         <BMI />
-        <TDEE />
-        <IIFYM />
       </div>
     );
   }
