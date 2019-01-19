@@ -1,14 +1,20 @@
-li {
+ul li {
   list-style-type: none;
 }
 
-ul li input[type="date"] {
+input[type="date"] {
   width: 200px;
 }
 
 .col-25 {
   float: left;
   width: 25%;
+  margin-top: 6px;
+}
+
+.col-50 {
+  float: left;
+  width: 50%;
   margin-top: 6px;
 }
 
@@ -21,11 +27,11 @@ ul li input[type="date"] {
 .grid-container {
   display: grid;
   height: 250px;
-  width: 550px;
+  width: 600px;
   align-content: center;
   justify-items: left;
   grid-gap: 5px;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   border: 2px dashed gray;
   padding: 10px;
   margin: 10px auto;
@@ -41,22 +47,46 @@ ul li input[type="date"] {
 ul.filtered-container {
   display: grid;
   /* height: 20px; */
-  width: 550px;
+  width: 600px;
   align-content: center;
   justify-items: left;
   grid-gap: 5px;
-  grid-template-columns: auto auto 1fr;
+  grid-template-columns: 1fr 1fr;
   border: 2px dashed gray;
   padding: 10px;
   margin: 10px auto;
 }
 
+/* .grid-submit:hover {
+  background-color: var(--blue-0);
+  color: var(--white-0);
+}
+.grid-submit {
+  float: left;
+  display: block;
+  color: var(--white-0);
+  text-align: center;
+  padding: 14px 14px;
+  text-decoration: none;
+  font-size: 17px;
+} */
+
+button.grid-submit {
+  background-color: var(--blue-0);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+button.grid-submit:hover {
+  background-color: var(--green-0);
+}
+
 /* MOBILE */
 @media screen and (max-width: 600px) {
-  .burger-menu {
-    display: block;
-  }
-
   ul {
     width: 100%;
     background-color: var(--white-1);
@@ -67,14 +97,14 @@ ul.filtered-container {
     padding: 10px;
   }
 
-  li:nth-child(odd) {
+  li.grid-item:nth-child(odd) {
     background-color: var(--blue-0);
   }
   li:hover:nth-child(odd) {
     background-color: var(--green-0);
   }
 
-  li:nth-child(even) {
+  li.grid-item:nth-child(even) {
     background-color: var(--blue-1);
   }
 
@@ -86,8 +116,34 @@ ul.filtered-container {
     color: var(--red-0);
     font-size: 24px;
     font-weight: bold;
+    width: 100%;
   }
-  filter-container {
-    width: 100px;
+
+  ul.grid-container,
+  ul.filtered-container {
+    align-content: center;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-items: left;
+    grid-gap: 5px;
+    border: 2px dashed gray;
+    padding: 10px;
+    margin: 10px auto;
+  }
+
+  li,
+  .col-25,
+  .col-75,
+  input[type="submit"],
+  input[type="date"],
+  div.filter-container,
+  .grid-submit {
+    width: 100%;
+    margin-top: 0;
+  }
+  button.grid-submit {
+    height: 40px;
   }
 }

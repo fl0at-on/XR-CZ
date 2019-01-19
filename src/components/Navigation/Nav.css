@@ -44,15 +44,14 @@ nav .nav-btn-active {
   color: var(--white-0);
 }
 
-nav .nav-btn:hover {
-  background-color: var(--blue-0);
-  color: var(--white-0);
-}
-
 nav .nav-btn-active:hover {
   background-color: var(--blue-0);
 }
 
+nav .nav-btn:hover {
+  background-color: var(--blue-0);
+  color: var(--white-0);
+}
 nav .nav-btn {
   float: left;
   display: block;
