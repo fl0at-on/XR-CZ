@@ -27,7 +27,6 @@ input[type="date"] {
 .grid-container {
   display: grid;
   height: 250px;
-  width: 600px;
   align-content: center;
   justify-items: left;
   grid-gap: 5px;
@@ -46,8 +45,6 @@ input[type="date"] {
 
 ul.filtered-container {
   display: grid;
-  /* height: 20px; */
-  width: 600px;
   align-content: center;
   justify-items: left;
   grid-gap: 5px;
@@ -56,20 +53,6 @@ ul.filtered-container {
   padding: 10px;
   margin: 10px auto;
 }
-
-/* .grid-submit:hover {
-  background-color: var(--blue-0);
-  color: var(--white-0);
-}
-.grid-submit {
-  float: left;
-  display: block;
-  color: var(--white-0);
-  text-align: center;
-  padding: 14px 14px;
-  text-decoration: none;
-  font-size: 17px;
-} */
 
 button.grid-submit {
   background-color: var(--blue-0);
@@ -85,8 +68,23 @@ button.grid-submit:hover {
   background-color: var(--green-0);
 }
 
+#filter-chk {
+  display: none;
+}
+
+.filter-button {
+  display: none;
+}
+
 /* MOBILE */
 @media screen and (max-width: 600px) {
+  #filter-chk:checked ~ .filter-menu-view {
+    display: inline;
+  }
+  #filter-chk ~ .filter-menu-view {
+    display: none;
+  }
+
   ul {
     width: 100%;
     background-color: var(--white-1);
@@ -112,9 +110,19 @@ button.grid-submit:hover {
     background-color: var(--green-1);
   }
 
+  .filter-button {
+    display: inline;
+    position: absolute;
+    right: 25px;
+    top: 50px;
+    transform: scale(1.2);
+    background-color: aquamarine;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
   li {
     color: var(--red-0);
-    font-size: 24px;
     font-weight: bold;
     width: 100%;
   }
@@ -124,13 +132,9 @@ button.grid-submit:hover {
     align-content: center;
     width: 100%;
     height: auto;
+    /* grid-template-columns: 1fr; */
     display: flex;
     flex-direction: column;
-    justify-items: left;
-    grid-gap: 5px;
-    border: 2px dashed gray;
-    padding: 10px;
-    margin: 10px auto;
   }
 
   li,

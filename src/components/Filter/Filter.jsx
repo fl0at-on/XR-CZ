@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import FilterForm from "./FilterForm.jsx";
 import ActiveFilters from "./ActiveFilters.jsx";
 import { Options } from "./Options.jsx";
-
 import "./Filter.css";
 
 class Filter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterSettings: Options.default
+      filterSettings: Options.initialValues()
     };
   }
 
@@ -77,17 +76,23 @@ class Filter extends Component {
     //console.table(this.state.filterSettings);
     return (
       <div className="filter-container">
-        <FilterForm
-          onSubmit={e => this.handleSubmit(e)}
-          onChange={e => this.handleFilterChange(e)}
-          item={this.props}
-          value={this.state.filterSettings}
-        />
-        <ActiveFilters
-          item={this.props}
-          value={this.state.filterSettings}
-          onChange={e => this.deleteFilter(e)}
-        />
+        <input className="filter-chk" id="filter-chk" type="checkbox" />
+        <label htmlFor="filter-chk">
+          <i className="fa fas fa-filter filter-button" />
+        </label>
+        <div className="filter-menu-view">
+          <FilterForm
+            onSubmit={e => this.handleSubmit(e)}
+            onChange={e => this.handleFilterChange(e)}
+            item={this.props}
+            value={this.state.filterSettings}
+          />
+          <ActiveFilters
+            item={this.props}
+            value={this.state.filterSettings}
+            onChange={e => this.deleteFilter(e)}
+          />
+        </div>
       </div>
     );
   }

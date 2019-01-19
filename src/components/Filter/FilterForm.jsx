@@ -11,12 +11,12 @@ const FilterForm = props => {
   return (
     <form autoComplete="off" onSubmit={e => props.onSubmit(e)}>
       <ul className="grid-container">
-        {Options.filters.map((item, index) => {
+        {Options.filters.map(item => {
           switch (item.type) {
             case "select":
               return (
                 <InputSelect
-                  key={index}
+                  key={item.id}
                   item={item}
                   onChange={e => props.onChange(e)}
                   value={props.value[item.name]}
@@ -25,7 +25,7 @@ const FilterForm = props => {
             case "text":
               return (
                 <InputText
-                  key={index}
+                  key={item.id}
                   item={item}
                   onChange={e => props.onChange(e)}
                   value={
@@ -41,7 +41,7 @@ const FilterForm = props => {
             case "date":
               return (
                 <InputDate
-                  key={index}
+                  key={item.id}
                   item={item}
                   onChange={e => props.onChange(e)}
                   value={
@@ -56,7 +56,7 @@ const FilterForm = props => {
             default:
               return (
                 <InputDefault
-                  key={index}
+                  key={item.id}
                   item={item}
                   onChange={e => props.onChange(e)}
                   value={

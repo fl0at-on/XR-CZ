@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import Options from "./Options.jsx";
+import React from "react";
 
 const ActiveFilters = props => {
   // console.log(props);
@@ -22,6 +21,7 @@ const ActiveFilters = props => {
             >
               <span>{Object.keys(item)}</span>
               <span>:</span>
+
               <span>{Object.values(item)}</span>
               <span
                 name={Object.keys(item)}
