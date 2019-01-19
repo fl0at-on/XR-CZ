@@ -1,0 +1,93 @@
+li {
+  list-style-type: none;
+}
+
+ul li input[type="date"] {
+  width: 200px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.grid-container {
+  display: grid;
+  height: 250px;
+  width: 550px;
+  align-content: center;
+  justify-items: left;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr;
+  border: 2px dashed gray;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.grid-item {
+}
+
+.grid-submit {
+  grid-column: 1 / span 3;
+}
+
+ul.filtered-container {
+  display: grid;
+  /* height: 20px; */
+  width: 550px;
+  align-content: center;
+  justify-items: left;
+  grid-gap: 5px;
+  grid-template-columns: auto auto 1fr;
+  border: 2px dashed gray;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+/* MOBILE */
+@media screen and (max-width: 600px) {
+  .burger-menu {
+    display: block;
+  }
+
+  ul {
+    width: 100%;
+    background-color: var(--white-1);
+    padding-left: 0;
+  }
+
+  li {
+    padding: 10px;
+  }
+
+  li:nth-child(odd) {
+    background-color: var(--blue-0);
+  }
+  li:hover:nth-child(odd) {
+    background-color: var(--green-0);
+  }
+
+  li:nth-child(even) {
+    background-color: var(--blue-1);
+  }
+
+  li:hover:nth-child(even) {
+    background-color: var(--green-1);
+  }
+
+  li {
+    color: var(--red-0);
+    font-size: 24px;
+    font-weight: bold;
+  }
+  filter-container {
+    width: 100px;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ExerciseHistory from "./ExerciseHistory.jsx";
 import WeightHistory from "./WeightHistory.jsx";
+import Filter from "../Filter/Filter.jsx";
 import "../App.css";
 
 class Reports extends Component {
@@ -13,6 +14,7 @@ class Reports extends Component {
     return (
       <div className="container">
         <h1>Let's get Reporting!</h1>
+        <Filter />
         <ExerciseHistory />
         <WeightHistory />
       </div>
