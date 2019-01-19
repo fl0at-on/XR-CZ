@@ -70,12 +70,10 @@ const FilterForm = props => {
               );
           }
         })}
-        <span>
-          <button className="grid-submit nav-btn" type="submit">
-            Search{"  "}
-            <i className="fa fas fa-search" />
-          </button>
-        </span>
+        <button className="grid-submit nav-btn" type="submit">
+          Search{"  "}
+          <i className="fa fas fa-search" />
+        </button>
       </ul>
     </form>
   );

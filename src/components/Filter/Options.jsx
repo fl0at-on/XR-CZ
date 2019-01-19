@@ -15,9 +15,9 @@ export const Options = {
         "Quads"
       ]
     },
-    { id: 2, name: "Exercise", type: "text" },
     { id: 3, name: "Begin Date", type: "date" },
-    { id: 4, name: "End Date", type: "date" }
+    { id: 4, name: "End Date", type: "date" },
+    { id: 2, name: "Exercise", type: "text" }
   ],
   initialValues: function() {
     return this.filters.map(obj => {

@@ -14,7 +14,7 @@ const InputSelect = props => {
           name={item.name}
           id={item.id}
           onChange={e => props.onChange(e)}
-          defaultValue="Select One"
+          defaultValue={"Select One"}
           value={props.value}
         >
           <option disabled>Select One</option>

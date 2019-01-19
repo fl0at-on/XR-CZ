@@ -10,12 +10,7 @@ const ActiveFilters = props => {
           return (
             <div
               key={index}
-              style={{
-                backgroundColor: "#88ade8",
-                borderRadius: "10px",
-                padding: "5px",
-                textAlign: "right"
-              }}
+              className="active-filter-text"
               name={Object.keys(item)}
               id={Object.keys(item)}
             >
@@ -25,15 +20,7 @@ const ActiveFilters = props => {
               <span>{Object.values(item)}</span>
               <span
                 name={Object.keys(item)}
-                style={{
-                  backgroundColor: "mistyrose",
-                  color: "grey",
-                  borderRadius: "10px",
-                  textAlign: "center",
-                  verticalAlign: "center",
-                  paddingLeft: "2px",
-                  paddingRight: "2px"
-                }}
+                className="active-filter-chk "
                 onClick={e => {
                   props.onChange(e);
                 }}
