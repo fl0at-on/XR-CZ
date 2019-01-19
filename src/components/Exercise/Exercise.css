@@ -1,0 +1,17 @@
+.exercise-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  border: 1px dashed grey;
+  background-color: var(--white-0);
+}
+
+input[type="checkbox"]:checked ~ label {
+  font-weight: bold;
+  background-color: rgb(27, 211, 57);
+  /* padding: 10px; */
+}
+
+input[type="checkbox"] ~ label {
+  /* padding: 10px; */
+}

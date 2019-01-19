@@ -61,6 +61,12 @@ class NavBar extends React.Component {
               children="Reports"
               onClick={() => {}}
             />
+            <NavTab
+              to="/exercise"
+              className="nav-btn "
+              children="Exercise"
+              onClick={() => {}}
+            />
           </div>
 
           <ul className="burger-menu">
@@ -108,6 +114,19 @@ class NavBar extends React.Component {
                 to="/report"
                 className="nav-mobile"
                 children="Reports"
+                onClick={() => this.setState({ checked: false })}
+              >
+                <span>
+                  <i className="fa fa-fw  fas fa-angle-right" />
+                  Report
+                </span>
+              </NavTab>
+            </li>
+            <li>
+              <NavTab
+                to="/exercise"
+                className="nav-mobile"
+                children="Exercise"
                 onClick={() => this.setState({ checked: false })}
               >
                 <span>
