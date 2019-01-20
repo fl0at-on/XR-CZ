@@ -9,6 +9,7 @@ const RandomExerciseOutput = props => {
     if (a.part > b.part) return 1;
     if (b.part > a.part) return -1;
     if (a.part === b.part) return 0;
+    return 0;
   });
 
   return (

@@ -12,7 +12,7 @@ const LogInForm = props => {
           <input
             type="text"
             id="username"
-            name="username"
+            name="userName"
             onChange={e => props.onChange(e)}
           />
         </div>
@@ -50,23 +50,44 @@ class Landing extends React.Component {
     const name = e.target.name;
     const value = e.target.value;
     //console.log(`[handleChange] ${name} is being set to: ${value}`);
-    this.setState({ [name]: value });
+    this.setState({ [name]: value }); //, () => console.log(this.state[name]));
   };
-  handleSubmit = e => {
+  handleSubmit = async e => {
     e.preventDefault();
     //run through process to check if user/pw are valid.
 
-    this.setState({ loggedIn: true });
+    //console.log(this.state.userName);
+    //console.log(this.state.password);
+    const serverResponse = await fetch(
+      `/api/landing/login/${this.state.userName}/${this.state.password}`,
+      { method: "post" }
+    );
+    console.table(serverResponse);
+
+    const body = await serverResponse.json();
+    if (serverResponse.status !== 200) throw Error(body.message);
+
+    console.log(body);
+    //return body;
+
+    //post to mongo something about the inputs
+
+    //    this.setState({ loggedIn: true });
   };
 
   callAPI = async () => {
-    const serverResponse = await fetch(`/landing`);
+    const serverResponse = await fetch("/api/landing");
+    //console.table(serverResponse);
 
-    console.log(serverResponse);
+    const body = await serverResponse.json();
+    if (serverResponse.status !== 200) throw Error(body.message);
+    return body;
   };
 
   componentDidMount() {
-    this.callAPI();
+    this.callAPI().then(a => {
+      return; //console.log(a);
+    });
   }
 
   render() {

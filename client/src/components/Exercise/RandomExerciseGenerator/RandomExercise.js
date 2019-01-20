@@ -28,7 +28,7 @@ class RandomExercise extends React.Component {
 
       /*Associates between exercises.category.name => exercises.name for Output component*/
       let outputParts = {};
-      let outputResult = this.props.exercises.map(obj => {
+      this.props.exercises.map(obj => {
         if (outputParts[obj.category.name]) {
           return outputParts[obj.category.name].push({
             name: obj.name,

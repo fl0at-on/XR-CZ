@@ -1,34 +1,59 @@
 // init project
 const express = require("express"); // the library we will use to handle requests
-const app = express(); // instantiate express
 //app.use(require("cors")()); // allow Cross-domain requests
-app.use(require("body-parser").json()); // automatically parses request data to JSON
+const bodyParser = require("body-parser");
+const app = express(); // instantiate express
 const port = process.env.PORT || 5000;
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+require("dotenv").config();
 const mongodb = require("mongodb");
 const uri = process.env.URI;
-const collection = `${uri}Customers`;
+//const collection = `${uri}Customers`;
 
-// mongodb.MongoClient.connect(uri,function(err,db){
+let dbName = "local";
+let collName = "Customers";
 
-// base route
-app.get("/landing", function(request, response) {
-  //connect to Mongo, process the things, send back a response
+mongodb.MongoClient.connect(
+  uri,
+  { useNewUrlParser: true },
+  function(err, db) {
+    // base route
+    app.get("/api/landing", (req, res) => {
+      //connect to Mongo, process the things, send back a response
 
-  response.send("[serverSide] you have reached the landing"); // always responds with the string "TODO"
-});
+      res.send({ body: "[serverSide] you reached the landing" });
+    });
 
-// base route
-app.post("/landing/login", function(request, response) {
-  response.send("[serverSide] login details enroute?"); // always responds with the string "TODO"
-});
+    // base route
+    app.post("/api/landing/login/:un/:pw", (req, res) => {
+      //parsing params
+      //console.log(req.params);
+      const newVal = { user: req.params.un, pw: req.params.pw };
+      console.log(newVal);
+      //console.log(db);
+      //console.log(uri);
+      if (err) throw err;
+      let dbo = db.db(dbName);
+      dbo.collection(collName).insertOne(newVal, function(err, res) {
+        if (err) throw err;
 
-app.put("/landing/update", function(request, response) {
-  response.send("[serverSide] update statement"); // always responds with the string "TODO"
-});
+        //db.close();
+        // return res.send({ body: err });
+      });
 
-// listen for requests, the process.env.PORT is needed because
-// we are using glitch, otherwise you could have written 80 or whatever
-var listener = app.listen(port, function() {
-  console.log("Your app is listening on port " + listener.address().port);
-});
+      res.send({ body: `${newVal} inserted` });
+    });
+
+    app.put("/api/landing/update", function(req, res) {
+      res.send("[serverSide] update statement");
+    });
+
+    // listen for requests
+    var listener = app.listen(port, function() {
+      console.log("Your app is listening on port " + port);
+    });
+  }
+);
