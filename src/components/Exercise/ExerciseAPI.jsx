@@ -21,7 +21,8 @@ class APICall extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      exerciseList: []
+      exerciseList: [],
+      loadingState: false
     };
   }
 
@@ -29,8 +30,11 @@ class APICall extends React.Component {
     const cachedHits = localStorage.getItem("exercises");
 
     if (cachedHits) {
-      console.log(cachedHits);
-      this.setState({ exerciseList: JSON.parse(cachedHits) });
+      //console.log(cachedHits);
+      this.setState({
+        exerciseList: JSON.parse(cachedHits),
+        loadingState: false
+      });
       return;
     }
     //loop through pages? API currently has 29 pages of exercises
@@ -50,7 +54,7 @@ class APICall extends React.Component {
         result = await res.results.concat(result);
       }
       i++;
-      console.log(result);
+      //console.log(result);
     } while (res.next !== null);
 
     // console.log("[callAPI] returns:");
@@ -61,13 +65,13 @@ class APICall extends React.Component {
     localStorage.setItem("exercises", JSON.stringify(result));
     //set state
     this.setState(
-      { exerciseList: result } //, () =>
+      { exerciseList: result, loadingState: false } //, () =>
       //console.log(this.state.exerciseList)
     );
   };
 
   componentDidMount = () => {
-    this.callAPI();
+    this.setState({ loadingState: true }, () => this.callAPI());
   };
 
   render() {
@@ -75,7 +79,10 @@ class APICall extends React.Component {
     // console.log(this.state.exerciseList);
     return (
       <div className="">
-        <RandomExercise exercises={this.state.exerciseList} />
+        <RandomExercise
+          loading={this.state.loadingState}
+          exercises={this.state.exerciseList}
+        />
       </div>
     );
   }

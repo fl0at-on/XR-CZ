@@ -4,6 +4,7 @@ import ExerciseTracker from "./ExerciseTracker.jsx";
 import WeightTracker from "./WeightTracker.jsx";
 
 import "../App.css";
+import "./Trackers.css";
 
 class Trackers extends Component {
   constructor(props) {

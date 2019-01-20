@@ -15,7 +15,7 @@ class App extends Component {
         <div>
           <NavBar />
           <Switch>
-            <Redirect exact path="/" to="/tracker" />
+            <Redirect exact path="/" to="/landing" />
             <Route path="/landing" component={Landing} />
             <Route path="/tracker" component={Trackers} />
             <Route path="/exercise" component={APICall} />

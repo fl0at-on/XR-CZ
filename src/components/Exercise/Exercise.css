@@ -1,17 +1,115 @@
 .exercise-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 4fr;
   grid-gap: 10px;
-  border: 1px dashed grey;
+  border-radius: 5px;
   background-color: var(--white-0);
 }
 
 input[type="checkbox"]:checked ~ label {
-  font-weight: bold;
-  background-color: rgb(27, 211, 57);
-  /* padding: 10px; */
+  background-color: var(--green-0);
 }
 
 input[type="checkbox"] ~ label {
-  /* padding: 10px; */
+  background-color: none;
+}
+
+label.input-lbl {
+  display: flex;
+  font-size: 20px;
+  border: 2px dashed var(--black-1);
+  padding: 5px;
+  margin-top: 1px;
+}
+
+button.input-btn {
+  background-color: var(--blue-0);
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+  margin-top: 5px;
+}
+
+button.input-btn:hover {
+  background-color: var(--green-0);
+}
+
+.exercise-output-grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 2px;
+  margin: 5px;
+}
+
+.eo-grid-header {
+  grid-column: 1 / span 2;
+  text-align: center;
+  border: 3px solid (--green-0);
+  font-size: 30px;
+}
+
+.eo-grid-row {
+  border: 1px solid var(--green-0);
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+.eo-grid-label {
+  font-weight: bold;
+  border: 1px solid (--green-0);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.eo-grid-complete {
+  grid-column: 1 / span 2;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: bold;
+
+  border: 1px solid var(--black-1);
+  font-size: 16px;
+}
+.eo-grid-complete ~ span {
+  text-align: center;
+}
+
+/* MOBILE */
+@media screen and (max-width: 600px) {
+  .exercise-container {
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    grid-gap: 0px;
+  }
+
+  li {
+    padding: 0px;
+  }
+  label.input-lbl {
+    justify-content: center;
+  }
+  button.input-btn {
+    width: 100%;
+  }
+  .eo-grid-row {
+    width: 100%;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+
+  .exercise-output-grid {
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: auto;
+  }
+  .eo-grid-complete {
+    justify-content: center;
+    text-align: center;
+  }
 }

@@ -33,7 +33,6 @@ class NavBar extends React.Component {
           className="icon fa fa-bars"
           onClick={() => this.setState({ checked: !checked })}
         />
-
         <nav className="nav-bar">
           <div>
             <NavTab
@@ -56,15 +55,15 @@ class NavBar extends React.Component {
               onClick={() => {}}
             />
             <NavTab
-              to="/report"
-              className="nav-btn "
-              children="Reports"
-              onClick={() => {}}
-            />
-            <NavTab
               to="/exercise"
               className="nav-btn "
               children="Exercise"
+              onClick={() => {}}
+            />
+            <NavTab
+              to="/report"
+              className="nav-btn "
+              children="Reports"
               onClick={() => {}}
             />
           </div>
@@ -111,6 +110,19 @@ class NavBar extends React.Component {
             </li>
             <li>
               <NavTab
+                to="/exercise"
+                className="nav-mobile"
+                children="Exercise"
+                onClick={() => this.setState({ checked: false })}
+              >
+                <span>
+                  <i className="fa fa-fw  fas fa-angle-right" />
+                  Exercise
+                </span>
+              </NavTab>
+            </li>
+            <li>
+              <NavTab
                 to="/report"
                 className="nav-mobile"
                 children="Reports"
@@ -122,19 +134,7 @@ class NavBar extends React.Component {
                 </span>
               </NavTab>
             </li>
-            <li>
-              <NavTab
-                to="/exercise"
-                className="nav-mobile"
-                children="Exercise"
-                onClick={() => this.setState({ checked: false })}
-              >
-                <span>
-                  <i className="fa fa-fw  fas fa-angle-right" />
-                  Report
-                </span>
-              </NavTab>
-            </li>
+
             <li>
               <label
                 className="nav-mobile"

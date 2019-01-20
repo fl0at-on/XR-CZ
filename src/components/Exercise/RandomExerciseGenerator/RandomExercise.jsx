@@ -23,9 +23,8 @@ class RandomExercise extends React.Component {
       //console.log(this.props);
       const uniqueParts = this.props.exercises
         .map(item => item.category.name)
-        .filter((value, index, self) => self.indexOf(value) === index);
-
-      //console.log(uniqueParts);
+        .filter((value, index, self) => self.indexOf(value) === index)
+        .sort();
 
       /*Associates between exercises.category.name => exercises.name for Output component*/
       let outputParts = {};
@@ -44,6 +43,17 @@ class RandomExercise extends React.Component {
       this.setState({ uniqueParts: uniqueParts, outputParts: outputParts });
     }
   }
+
+  toggleAll = e => {
+    //add/remove all body parts to render
+    //currently will only be able to turn 'off', not turn on.
+    //toggledParts array doesn't save the name if it's off.
+    //loop over all of this.state.toggledParts?
+    this.setState(
+      { toggledParts: [] } //, () =>
+      //console.table(this.state.toggledParts)
+    );
+  };
 
   handleToggle = e => {
     const newToggledParts = [...this.state.toggledParts];
@@ -71,22 +81,30 @@ class RandomExercise extends React.Component {
   };
 
   render() {
-    // console.log(this.state.outputParts);
-    // console.log(this.state.uniqueParts);
     //console.log(this.props);
-
-    return (
-      <div className="exercise-container">
-        <RandomExerciseInput
-          exercises={this.state.uniqueParts}
-          onToggle={e => this.handleToggle(e)}
-        />
-        <RandomExerciseOutput
-          //exercises={this.state.outputParts}
-          item={this.state.toggledParts}
-        />
-      </div>
-    );
+    let isLoading = this.props.loading;
+    if (!isLoading) {
+      return (
+        <div className="exercise-container">
+          <RandomExerciseInput
+            toggleAll={e => this.toggleAll(e)}
+            exercises={this.state.uniqueParts}
+            toggled={this.state.toggledParts}
+            onToggle={e => this.handleToggle(e)}
+          />
+          <RandomExerciseOutput
+            //exercises={this.state.outputParts}
+            item={this.state.toggledParts}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div className="exercise-container">
+          <span>Loading!</span>
+        </div>
+      );
+    }
   }
 }
 

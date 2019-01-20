@@ -1,26 +1,27 @@
 import React from "react";
 //import { Exercises } from "./ExerciseListing.jsx";
+import InputItem from "./InputItem.jsx";
 
 const ExerciseInput = props => {
-  //console.log(props);
+  //console.log(props.toggled);
+
   return (
     <div>
-      <p>Select Body Parts to workout:</p>
+      <h2 style={{ textAlign: "right" }}>Body Parts</h2>
       <ul>
         {props.exercises.map((part, index) => {
           return (
-            <li key={index}>
-              <input
-                style={{ display: "none" }}
-                type="checkbox"
-                name={part}
-                id={`${part}-chk`}
-                onChange={e => props.onToggle(e)}
-              />
-              <label htmlFor={`${part}-chk`}>{part}</label>
-            </li>
+            <InputItem
+              key={index}
+              toggled={props.toggled}
+              part={part}
+              onChange={e => props.onToggle(e)}
+            />
           );
         })}
+        <button className="input-btn" onClick={e => props.toggleAll(e)}>
+          Clear All
+        </button>
       </ul>
     </div>
   );
