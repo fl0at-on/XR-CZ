@@ -1,5 +1,5 @@
 import React from "react";
-import { Exercises } from "./ExerciseListing.jsx";
+//import { Exercises } from "./ExerciseListing.jsx";
 
 const RandomExerciseOutput = props => {
   //console.log(props);

@@ -1,21 +1,21 @@
 import React from "react";
-import RandomExercise from "./RandomExercise.jsx";
+import RandomExercise from "./RandomExerciseGenerator/RandomExercise.jsx";
 import "./Exercise.css";
 
 const BASE_URL = "https://wger.de/api/v2/";
 const EXERCISE_INFO_URL = "exerciseinfo/";
 const PAGE = "?page=";
 
-const ExerciseOutput = {
-  Abs: [
-    { name: "10 min abs", description: "work them out" },
-    { name: "crunches", description: "sit up and down" }
-  ],
-  Chest: [
-    { name: "bench press", description: "push up your arms" },
-    { name: "pec flies", description: "move up and down" }
-  ]
-};
+// const ExerciseOutput = {
+//   Abs: [
+//     { name: "10 min abs", description: "work them out" },
+//     { name: "crunches", description: "sit up and down" }
+//   ],
+//   Chest: [
+//     { name: "bench press", description: "push up your arms" },
+//     { name: "pec flies", description: "move up and down" }
+//   ]
+// };
 
 class APICall extends React.Component {
   constructor(props) {
@@ -26,14 +26,40 @@ class APICall extends React.Component {
   }
 
   callAPI = async () => {
-    const URLConstructor = `${BASE_URL}${EXERCISE_INFO_URL}`;
-    const data = await fetch(URLConstructor);
-    const res = await data.json();
-    const result = await res.results;
+    const cachedHits = localStorage.getItem("exercises");
+
+    if (cachedHits) {
+      console.log(cachedHits);
+      this.setState({ exerciseList: JSON.parse(cachedHits) });
+      return;
+    }
+    //loop through pages? API currently has 29 pages of exercises
+    let res;
+    let result;
+
+    let i = 1;
+    do {
+      //console.log(i);
+      const URLConstructor = `${BASE_URL}${EXERCISE_INFO_URL}${PAGE}${i}`;
+      const data = await fetch(URLConstructor);
+      res = await data.json();
+
+      if (i === 1) {
+        result = await res.results;
+      } else {
+        result = await res.results.concat(result);
+      }
+      i++;
+      console.log(result);
+    } while (res.next !== null);
 
     // console.log("[callAPI] returns:");
-    // console.dir(result);
+    //console.dir(result);
     //return result;
+
+    //local cache
+    localStorage.setItem("exercises", JSON.stringify(result));
+    //set state
     this.setState(
       { exerciseList: result } //, () =>
       //console.log(this.state.exerciseList)

@@ -1,8 +1,8 @@
 import React from "react";
-import { Exercises } from "./ExerciseListing.jsx";
-import RandomExerciseInput from "./RandomExerciseInput.jsx";
-import RandomExerciseOutput from "./RandomExerciseOutput.jsx";
-import "./Exercise.css";
+//import { Exercises } from "./ExerciseListing.jsx";
+import RandomExerciseInput from "./Input.jsx";
+import RandomExerciseOutput from "./Output.jsx";
+//import * from "../"
 
 class RandomExercise extends React.Component {
   // constructor(props) {
@@ -18,9 +18,9 @@ class RandomExercise extends React.Component {
     //this runs before props are passed through from ExerciseAPI. Setting state here won't work for props received.
     /*Returns unique BodyParts from props for Input component */
     // console.log(prevProps);
-    // console.log(this.props);
 
     if (prevProps !== this.props) {
+      //console.log(this.props);
       const uniqueParts = this.props.exercises
         .map(item => item.category.name)
         .filter((value, index, self) => self.indexOf(value) === index);
